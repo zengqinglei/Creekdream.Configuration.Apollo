@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6523769F-795D-4FC2-8281-3EC042959109}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F88FCF5A-E1A1-4AF9-A60D-A2E807FCE218}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{7657DA9F-6211-498E-99E6-B6E068B33880}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		common.props = common.props
+		LICENSE = LICENSE
+		pack.ps1 = pack.ps1
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creekdream.Configuration.Apollo", "src\Creekdream.Configuration.Apollo\Creekdream.Configuration.Apollo.csproj", "{46E31709-E375-4CB3-B80E-0BB125BC5C0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creekdream.Configuration.Apollo.Tests", "test\Creekdream.Configuration.Apollo.Tests\Creekdream.Configuration.Apollo.Tests.csproj", "{1AC56B28-7FE0-4FF5-BB41-B3B14280E133}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46E31709-E375-4CB3-B80E-0BB125BC5C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E31709-E375-4CB3-B80E-0BB125BC5C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E31709-E375-4CB3-B80E-0BB125BC5C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E31709-E375-4CB3-B80E-0BB125BC5C0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC56B28-7FE0-4FF5-BB41-B3B14280E133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC56B28-7FE0-4FF5-BB41-B3B14280E133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC56B28-7FE0-4FF5-BB41-B3B14280E133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC56B28-7FE0-4FF5-BB41-B3B14280E133}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46E31709-E375-4CB3-B80E-0BB125BC5C0B} = {6523769F-795D-4FC2-8281-3EC042959109}
+		{1AC56B28-7FE0-4FF5-BB41-B3B14280E133} = {F88FCF5A-E1A1-4AF9-A60D-A2E807FCE218}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75FFADA6-FE71-43B5-AE24-3D6C6672F4C2}
+	EndGlobalSection
+EndGlobal
