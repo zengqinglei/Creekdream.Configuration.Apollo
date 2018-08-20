@@ -138,9 +138,7 @@ namespace Creekdream.Configuration.Apollo
         /// </summary>
         private static string GetLocalIPAddress()
         {
-            UnicastIPAddressInformation mostSuitableIp = null;
             var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
-
             foreach (var network in networkInterfaces)
             {
                 if (network.OperationalStatus != OperationalStatus.Up)
@@ -158,7 +156,7 @@ namespace Creekdream.Configuration.Apollo
                     return address.Address.ToString();
                 }
             }
-            return mostSuitableIp?.Address.ToString();
+            return "127.0.0.1";
         }
     }
 }
