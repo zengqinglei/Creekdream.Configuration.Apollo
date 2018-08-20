@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creekdream.Configuration.Apollo", "src\Creekdream.Configuration.Apollo\Creekdream.Configuration.Apollo.csproj", "{46E31709-E375-4CB3-B80E-0BB125BC5C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Creekdream.Configuration.Apollo", "src\Creekdream.Configuration.Apollo\Creekdream.Configuration.Apollo.csproj", "{46E31709-E375-4CB3-B80E-0BB125BC5C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creekdream.Configuration.Apollo.Tests", "test\Creekdream.Configuration.Apollo.Tests\Creekdream.Configuration.Apollo.Tests.csproj", "{1AC56B28-7FE0-4FF5-BB41-B3B14280E133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Creekdream.Configuration.Apollo.Tests", "test\Creekdream.Configuration.Apollo.Tests\Creekdream.Configuration.Apollo.Tests.csproj", "{1AC56B28-7FE0-4FF5-BB41-B3B14280E133}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
