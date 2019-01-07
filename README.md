@@ -3,6 +3,9 @@
 安装包主要根据官方包进行重构以及根据官方api开放文档进行开发，主要有以下改进：
 * 修复了携程官方包在docker以network为host时获取localip失败导致程序无法运行的问题
 * 由于直接基于.net standard 2.0 开发代码也比较轻量级
+* 支持离线缓存文件(应用根目录/appsettings.cache)
+
+**[升级日志](https://github.com/zengqinglei/Creekdream.Configuration.Apollo/releases)**
 
 ##### 安装SDK
 ```
@@ -77,17 +80,3 @@ public void Test_Get_ConsulAddress()
     address.ShouldNotBeNull();
 }
 ```
-
-### Change Log
-
-*v1.0.0 2018-08-19*
-
-**Features**
-*  读取携程Apollo配置数据
-*  支持配置发布即时通知
-
-**Enhancements**
-*  基于.net standard 2.0 开发，基于httpclient发送请求
-
-**Bug Fixs**
-*  修复.net core docker部署网络模式以host时无法正确获取ip导致无法运行的问题

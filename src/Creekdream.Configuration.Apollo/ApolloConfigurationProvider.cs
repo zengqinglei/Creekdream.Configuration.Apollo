@@ -5,6 +5,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,6 +25,7 @@ namespace Creekdream.Configuration.Apollo
         private readonly IList<NamespaceNotification> _namespaceNotifications;
         private readonly ApolloOptions _apolloOptions;
         private readonly HttpClient _httpClient;
+        private readonly string _appsettingsCache = "appsettings.cache";
 
         /// <inheritdoc />
         public ApolloConfigurationProvider(ApolloOptions apolloOptions)
@@ -51,8 +53,11 @@ namespace Creekdream.Configuration.Apollo
                         });
                 });
 
-            UpdateNotifications();
-
+            // 首次启动读取配置
+            if (!UpdateNotifications())
+            {
+                ReadAppSettingsCache();
+            }
             // 长轮询刷新配置
             Task.Factory.StartNew(() =>
             {
@@ -87,9 +92,10 @@ namespace Creekdream.Configuration.Apollo
                 $"?appId={_apolloOptions.AppId}" +
                 $"&cluster={_apolloOptions.Cluster}" +
                 $"&notifications={WebUtility.UrlEncode(notificationsInput)}";
-            var response = _httpClient.GetAsync(url).GetAwaiter().GetResult();
-            if (response.IsSuccessStatusCode)
+            try
             {
+                var response = _httpClient.GetAsync(url).GetAwaiter().GetResult();
+                response.EnsureSuccessStatusCode();
                 var notificationsResultString = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 var notificationsOutput = JsonConvert.DeserializeObject<List<NamespaceNotification>>(notificationsResultString);
                 foreach (var notificationOutput in notificationsOutput)
@@ -106,9 +112,47 @@ namespace Creekdream.Configuration.Apollo
                     }
                     GetRealtimeConfig(notificationOutput.NamespaceName);
                 }
+                WriteAppSettingsCache();
                 return true;
             }
-            return false;
+            catch (HttpRequestException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 写入缓存配置文件
+        /// </summary>
+        public void WriteAppSettingsCache()
+        {
+            using (var writer = new StreamWriter(_appsettingsCache, false))
+            {
+                foreach (var key in Data.Keys)
+                {
+                    writer.WriteLine($"{key}={Data[key]}");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 读取缓存配置文件
+        /// </summary>
+        public void ReadAppSettingsCache()
+        {
+            if (File.Exists(_appsettingsCache))
+            {
+                using (var reader = new StreamReader(_appsettingsCache))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var data = reader.ReadLine().Split('=');
+                        var key = data[0];
+                        var value = data[1];
+                        Data[key] = value;
+                    }
+                }
+            }
         }
 
         /// <summary>

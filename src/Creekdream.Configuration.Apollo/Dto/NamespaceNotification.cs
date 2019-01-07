@@ -3,7 +3,7 @@
     /// <summary>
     /// 命名空间键值更新情况
     /// </summary>
-    public class NamespaceNotification
+    internal class NamespaceNotification
     {
         /// <summary>
         /// 命名空间名称

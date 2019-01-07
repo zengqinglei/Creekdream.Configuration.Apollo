@@ -5,7 +5,7 @@ namespace Creekdream.Configuration.Apollo.Dto
     /// <summary>
     /// 即时配置输出信息
     /// </summary>
-    public class RealtimeConfigOutput
+    internal class RealtimeConfigOutput
     {
         /// <summary>
         /// 应用Id
