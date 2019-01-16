@@ -81,19 +81,19 @@ namespace Creekdream.Configuration.Apollo
         /// <returns>返回是否有更新</returns>
         private bool UpdateNotifications()
         {
-            var notificationsInput = JsonConvert.SerializeObject(
+            try
+            {
+                var notificationsInput = JsonConvert.SerializeObject(
                     _namespaceNotifications,
                     new JsonSerializerSettings()
                     {
                         NullValueHandling = NullValueHandling.Ignore,
                         ContractResolver = new CamelCasePropertyNamesContractResolver()
                     });
-            var url = $"notifications/v2" +
-                $"?appId={_apolloOptions.AppId}" +
-                $"&cluster={_apolloOptions.Cluster}" +
-                $"&notifications={WebUtility.UrlEncode(notificationsInput)}";
-            try
-            {
+                var url = $"notifications/v2" +
+                    $"?appId={_apolloOptions.AppId}" +
+                    $"&cluster={_apolloOptions.Cluster}" +
+                    $"&notifications={WebUtility.UrlEncode(notificationsInput)}";
                 var response = _httpClient.GetAsync(url).GetAwaiter().GetResult();
                 response.EnsureSuccessStatusCode();
                 var notificationsResultString = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
@@ -115,7 +115,7 @@ namespace Creekdream.Configuration.Apollo
                 WriteAppSettingsCache();
                 return true;
             }
-            catch (HttpRequestException)
+            catch (Exception)
             {
                 return false;
             }
