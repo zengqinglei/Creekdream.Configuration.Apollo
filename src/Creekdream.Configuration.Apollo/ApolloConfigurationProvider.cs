@@ -126,13 +126,8 @@ namespace Creekdream.Configuration.Apollo
         /// </summary>
         public void WriteAppSettingsCache()
         {
-            using (var writer = new StreamWriter(_appsettingsCache, false))
-            {
-                foreach (var key in Data.Keys)
-                {
-                    writer.WriteLine($"{key}={Data[key]}");
-                }
-            }
+            var dataString = JsonConvert.SerializeObject(Data);
+            File.WriteAllText(_appsettingsCache, dataString);
         }
 
         /// <summary>
@@ -142,15 +137,11 @@ namespace Creekdream.Configuration.Apollo
         {
             if (File.Exists(_appsettingsCache))
             {
-                using (var reader = new StreamReader(_appsettingsCache))
+                var dataString = File.ReadAllText(_appsettingsCache);
+                var data = JsonConvert.DeserializeObject<IDictionary<string, string>>(dataString);
+                foreach (var key in data.Keys)
                 {
-                    while (!reader.EndOfStream)
-                    {
-                        var data = reader.ReadLine().Split('=');
-                        var key = data[0];
-                        var value = data[1];
-                        Data[key] = value;
-                    }
+                    Data[key] = data[key];
                 }
             }
         }
