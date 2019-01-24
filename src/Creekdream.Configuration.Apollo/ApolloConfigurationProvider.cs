@@ -126,7 +126,7 @@ namespace Creekdream.Configuration.Apollo
         /// </summary>
         public void WriteAppSettingsCache()
         {
-            var dataString = JsonConvert.SerializeObject(Data);
+            var dataString = JsonConvert.SerializeObject(Data, Formatting.Indented);
             File.WriteAllText(_appsettingsCache, dataString);
         }
 
