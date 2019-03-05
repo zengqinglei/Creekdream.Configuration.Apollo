@@ -40,10 +40,11 @@ Set-Location $packFolder
 Write-Host ""
 Write-Host "Do you wish to post to microsoft nuget ?"
 Write-Host ""
-$user_input = Read-Host 'Please enter y or n ?'
+$user_input = Read-Host 'Please enter y or n'
 if ($user_input -eq 'y') {
+	$api_key = Read-Host 'Please enter your nuget api key'
     foreach ($packfile in Get-ChildItem -Path $packFolder -Recurse -Include *.nupkg) {
-		tools\nuget\nuget.exe push $packfile -Source https://www.nuget.org/api/v2/package {your nuget appid}
+		tools\nuget\nuget.exe push $packfile -Source https://www.nuget.org/api/v2/package $api_key
     }
 }
 del *.nupkg
