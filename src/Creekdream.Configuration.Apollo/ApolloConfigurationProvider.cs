@@ -71,6 +71,10 @@ namespace Creekdream.Configuration.Apollo
                     {
                         OnReload();
                     }
+                    else
+                    {
+                        Thread.Sleep(10000);
+                    }
                 }
             }, TaskCreationOptions.LongRunning);
         }
@@ -115,8 +119,9 @@ namespace Creekdream.Configuration.Apollo
                 WriteAppSettingsCache();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"获取Apollo配置信息发生异常：{ex.ToString()}");
                 return false;
             }
         }
